@@ -19,3 +19,18 @@ export function formatMilliseconds(ms: number): string {
 
 	return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}s ${milliseconds.toFixed(1)}`;
 }
+
+
+export async function postData(url: string, data: object) {
+	const response = await fetch(url, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(data),
+	});
+
+	if (!response.ok) {
+		throw new Error(`Error in the API.`);
+	}
+
+	return response.json();
+}
